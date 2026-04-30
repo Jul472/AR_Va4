@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: ./questionnaire_targets.mind; maxTrack: 2; filterMinCF: 0.0001; filterBeta: 5000" vr-mode-ui="enabled: false">
+        <a-assets timeout="10000">
+            <img id="m&l" src="./M&L.png">
+            <video id="guatauba" src="./Dance.mp4" autoplay loop muted playsinline preload="auto" crossorigin="anonymous"></video>
+            <img id="kor" src="./Rey_de_las_ratas.jpeg">
+            <img id="alvin" src="./Alvin.jpg">
+        </a-assets>
+    
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+        <a-image src="#m&l" position="0 0 0" width="1" height="1.4"></a-image>
+    </a-entity>
+
+    <a-entity id="target" mindar-image-target="targetIndex: 1">
+        <a-video src="#guatauba" position="0 0 0" width="1" height="1.7"></a-video>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 2">
+        <a-image src="#kor" position="0 0 0" width="1" height="1"></a-image>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 3">
+        <a-image src="#alvin" position="0 0 0" width="1" height="1"></a-image>
+    </a-entity>
+
+    </a-scene>
+
+    <script>
+        document.querySelector("#target").addEventListener("targetFound", () => {
+            document.querySelector("#guatauba").play();
+        });
+        document.querySelector("#target").addEventListener("targetLost", () => {
+            document.querySelector("#guatauba").pause();
+        });
+    </script>
+  </body>
+</html>
